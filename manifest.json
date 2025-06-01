@@ -1,0 +1,20 @@
+{
+    "name": "Anyshare File Sharing",
+    "short_name": "Anyshare",
+    "icons": [
+      {
+        "src": "/logo/Anyshare(192px).png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/logo/Anyshare(512px).png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#e66a6c",
+    "background_color": "#e66a6c"
+  }
