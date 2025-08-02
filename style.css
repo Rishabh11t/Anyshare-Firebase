@@ -1,266 +1,168 @@
+/* Reset some basic styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+/* Body with smooth background and font */
+body {
+  background-color: #f6f9fc;
+  font-family: "Open Sans", sans-serif;
+  color: #212529;
+  padding: 20px;
+}
+
+/* Header */
+h1 {
+  font-size: 3rem;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Card */
 .card {
-    width: 400px;
-    height: 550px;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-      0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    font-family: "Open Sans", sans-serif;
-    font-size: 20px;
-    color: #fff;
-    background-color: #ceff89;
-    border-color: #212529;
-    border-radius: 10px;
-    z-index: 1;
-    /* position: relative; */
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 30px 25px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 1;
+}
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 95%;
   }
-  
-  /*Make Above Card responsive*/
-  @media only screen and (max-width: 600px) {
-    .card {
-      width: 95%;
-    }
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="file"] {
+  width: 90%;
+  padding: 12px 16px;
+  margin: 10px 0;
+  border: 1.5px solid #ced4da;
+  border-radius: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+  border-color: #4dabf7;
+  box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.2);
+  outline: none;
+  background-color: #f1f9ff;
+}
+
+/* Buttons */
+button {
+  padding: 14px 24px;
+  background-color: #212529;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #343a40;
+}
+
+/* Icons inside buttons */
+#downimg, #uping {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  transition: transform 0.3s ease;
+}
+
+#downimg:hover, #uping:hover {
+  transform: scale(1.1);
+}
+
+/* Section Headers */
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #343a40;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 10px;
+}
+
+/* Unique ID Display */
+#showunique {
+  font-size: 2rem;
+  padding: 10px 20px;
+  background-color: #e9f5db;
+  border: 2px solid #ced4da;
+  border-radius: 10px;
+  margin: 10px auto;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#showunique:hover {
+  background-color: #212529;
+  color: #e9f5db;
+}
+
+/* Footer */
+#footer, #note {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+  color: #6c757d;
+}
+
+/* Drag and Drop Area */
+.Drop-here {
+  width: 70%;
+  height: 80vh;
+  border: 2px dashed #adb5bd;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #495057;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 20px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: none;
+  opacity: 0.95;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+/* Flicker Animation (if you want to re-enable) */
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 0 0 4px #000, 0 0 11px #fff, 0 0 19px #fff,
+                 0 0 40px #0fa, 0 0 80px #0fa, 0 0 100px #0fa;
   }
-  
-  body {
-    background-color: #e66a6c;
+  20%, 24%, 55% {
+    text-shadow: none;
   }
-  
-  h1 {
-    /* animation: flicker 1.5s infinite alternate; */
-    color: rgb(0, 0, 0);
-    font-family: "Open Sans", sans-serif;
-    font-size: 50px;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  
-  }
-  
-  @keyframes flicker {
-  
-    0%,
-    18%,
-    22%,
-    25%,
-    53%,
-    57%,
-    100% {
-      text-shadow: 0 0 4px rgb(0, 0, 0), 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa,
-        0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa, 0 0 150px #0fa;
-    }
-  
-    20%,
-    24%,
-    55% {
-      text-shadow: none;
-    }
-  }
-  
-  input[type="text"] {
-    width: 80%;
-    padding: 12px 20px;
-    margin: 5px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-  }
-  
-  input[type="text"]:focus {
-    border: 3px solid #555;
-  }
-  
-  input[type="file"] {
-    width: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-    color: #212529;
-  }
-  
-  input[type="file"]:focus {
-    border: 3px solid #555;
-  }
-  
-  /* download */
-  
-  button {
-    height: 63px;
-    /* Rounded corner downloadbutton */
-    border-radius: 10px;
-    /* grey black background */
-    background-color: #212529;
-    /* white text */
-    color: #fff;
-    /* padding */
-    padding: 10px 20px;
-    /* text decoration none */
-    text-decoration: none;
-    /* font size */
-    font-size: 20px;
-    /* font family */
-    font-family: "Open Sans", sans-serif;
-    /* border none */
-    border: none;
-    /* cursor pointer */
-    cursor: pointer;
-    /* Center text and image */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-  }
-  
-  #downimg {
-    width: 40px;
-    height: 40px;
-    margin: 10px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    cursor: pointer;
-    transition: 0.5s;
-    -webkit-user-drag: none;
-  }
-  
-  #uping {
-    background-color: #fff;
-    width: 40px;
-    height: 40px;
-    margin: 10px;
-    border-radius: 50%;
-    border: 0px solid #fff;
-    cursor: pointer;
-    transition: 0.5s;
-    /* avoid image draggable or selectable */
-    -webkit-user-drag: none;
-    user-select: none;
-  
-  }
-  
-  h2 {
-    font-family: "Open Sans", sans-serif;
-    font-size: 30px;
-    color: #212529;
-    background-color: #ceff89;
-    border-color: #212529;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-    margin-bottom: 0px;
-  }
-  
-  p {
-    font-family: "Open Sans", sans-serif;
-    font-size: 30px;
-    color: #212529;
-  
-    border-color: #212529;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-  
-    font-weight: 700;
-  }
-  
-  #showunique {
-    width: 200px;
-    font-family: "Open Sans", sans-serif;
-    font-size: 50px;
-    color: #212529;
-    background-color: #ceff89;
-    border-color: #212529;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-  }
-  
-  #showunique:hover {
-    background-color: #212529;
-    color: #ceff89;
-    border-color: #212529;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-  }
-  
-  #ShowUniqueID {
-    width: max-content;
-    margin-top: 10px;
-    text-align: center;
-  
-  
-  }
-  
-  #footer {
-    text-align: center;
-    font-family: "Open Sans", sans-serif;
-    font-size: 20px;
-    color: #212529;
-    /* background-color: #ceff89; */
-    border-color: #212529;
-    border-radius: 10px;
-    /* padding: 5px 20px; */
-    text-align: center;
-    /* margin-top: 10px; */
-  }
-  
-  #note {
-    font-family: "Open Sans", sans-serif;
-    font-size: 10px;
-    color: #212529;
-    /* background-color: #ceff89; */
-    border-color: #212529;
-    border-radius: 10px;
-    /* padding: 10px 20px; */
-    text-align: center;
-    /* margin-top: 20px; */
-  
-  }
-  
-  
-  
-  
-  /*  */
-  .Drop-here{
-    width: 70%;
-    height: 80vh;
-    border: 2px dashed #ccc;
-    border-radius: 10px;
-    background-color: #fff;
-    color: #212529;
-    font-family: "Open Sans", sans-serif;
-    font-size: 20px;
-    text-align: center;
-    padding: 10px 20px;
-    /* margin: 10px 0; */
-    cursor: pointer;
-    transition: 0.5s;
-    /* make this div com above all other div */
-    position: absolute;
-    top: 0;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    /* left: 0; */
-    z-index: 2;
-    margin-left:12%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.8;
-    display:none;
-  
-  }
-  
-  /* when dragged the file higlight the .Drop-here div */
-  
+}
