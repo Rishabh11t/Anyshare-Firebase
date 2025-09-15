@@ -3,38 +3,70 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AnyShare</title>
+
+  <!-- Favicon & Manifest -->
   <link rel="icon" type="image/png" href="logo/anyshare.png" />
   <link rel="manifest" href="manifest.json" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Service Worker -->
   <script src="serviceworker.js"></script>
+
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-31PPT6CB61"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-31PPT6CB61');
+  </script>
+
+  <!-- Ads -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403539919880614"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div class="card">
     <h1>AnyShare</h1>
 
+    <!-- Upload Section -->
     <h2>Upload File</h2>
     <input type="file" id="file" onchange="flesize()" />
-    <button id="upload" onclick="uploadImage()">Upload</button>
+    <button id="upload" onclick="uploadImage()">
+      Upload
+      <img id="uping" src="upload.gif" alt="loading" hidden />
+    </button>
 
+    <!-- Unique ID Display -->
     <div id="ShowUniqueID" hidden>
       <p>Unique ID</p>
-      <input type="text" id="showunique" value="23456" disabled />
+      <input type="text" id="showunique" value="" disabled />
     </div>
 
+    <!-- Download Section -->
     <h2>Download File</h2>
     <input type="text" id="unique" placeholder="Enter Unique ID" />
-    <button id="show" onclick="showimage()">Download</button>
+    <button id="show" onclick="showimage()">
+      Download
+      <img id="downimg" src="download.gif" alt="loading" hidden />
+    </button>
   </div>
 
+  <!-- Drag & Drop Overlay -->
   <div class="Drop-here">
     <h1 class="Drop-text">Drop Here</h1>
   </div>
 
+  <!-- Footer -->
   <p id="footer">Made By Rishab and Ruchita</p>
 
+  <!-- Firebase + App Script -->
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase.js"></script>
   <script src="script.js"></script>
 </body>
