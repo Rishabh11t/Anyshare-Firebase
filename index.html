@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AnyShare</title>
 
-  <!-- Favicon & Manifest -->
   <link rel="icon" type="image/png" href="logo/anyshare.png" />
   <link rel="manifest" href="manifest.json" />
 
@@ -20,7 +19,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-31PPT6CB61"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-31PPT6CB61');
   </script>
@@ -33,7 +32,6 @@
     <div class="card">
       <h1>AnyShare</h1>
 
-      <!-- Upload Section -->
       <h2>Upload File</h2>
       <input type="file" id="file" onchange="flesize()" />
       <button id="upload" onclick="uploadImage()">
@@ -41,13 +39,11 @@
         <img id="uping" src="upload.gif" alt="loading" hidden />
       </button>
 
-      <!-- Unique ID Display -->
       <div id="ShowUniqueID" hidden>
         <p>Unique ID</p>
         <input type="text" id="showunique" value="" disabled />
       </div>
 
-      <!-- Download Section -->
       <h2>Download File</h2>
       <input type="text" id="unique" placeholder="Enter Unique ID" />
       <button id="show" onclick="showimage()">
@@ -57,11 +53,15 @@
     </div>
   </main>
 
-  <!-- Footer (sticky at bottom) -->
+  <!-- Footer pinned to bottom -->
   <footer id="footer">Made By Rishab and Ruchita</footer>
 
-  <!-- Firebase + App Script -->
+  <!-- Firebase CDN (v8 namespaced) -->
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+
+  <!-- App logic -->
   <script src="script.js"></script>
 </body>
 </html>
