@@ -1,143 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <link rel="icon" type="image/png" href="logo/anyshare.png">
-  <link rel="manifest" href="manifest.json">
-  <script src="serviceworker.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-31PPT6CB61"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-31PPT6CB61');
-  </script>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <title>Any Share</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403539919880614"
-    crossorigin="anonymous"></script>
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
-      background: #f8f9fa;
-    }
-
-    .card {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 350px;
-    }
-
-    .card h1 {
-      margin-bottom: 10px;
-    }
-
-    .card h2 {
-      margin: 15px 0;
-    }
-
-    input[type="file"],
-    input[type="text"] {
-      width: 90%;
-      padding: 8px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    button img {
-      width: 20px;
-      height: 20px;
-      display: none;
-    }
-
-    .Drop-here {
-      display: none;
-      margin-top: 20px;
-      padding: 20px;
-      border: 2px dashed #007bff;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 400px;
-      text-align: center;
-      background: #e9f5ff;
-    }
-
-    #note {
-      margin-top: 15px;
-      font-size: 12px;
-      color: #555;
-    }
-
-    #footer {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #333;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase.js"></script>
 </head>
-
 <body>
   <div class="card">
     <h1>Any Share</h1>
 
+    <!-- Upload Section -->
     <h2>Upload File</h2>
     <input type="file" id="file" onchange="flesize()" />
     <button id="upload" onclick="uploadImage()">
-      Upload <img id="uping" src="upload.gif" alt="uploading..." />
+      <span>Upload</span>
+      <img id="uping" src="upload.gif" alt="Uploading..." />
     </button>
 
+    <!-- Show Unique ID -->
     <div id="ShowUniqueID" hidden>
       <p>Unique ID</p>
-      <input type="text" id="showunique" value="23456" disabled>
+      <input type="text" id="showunique" value="" disabled />
     </div>
 
+    <!-- Download Section -->
     <div class="Download" id="downloadiv">
       <h2>Receive File</h2>
-      <input type="text" id="unique" placeholder="Enter Unique ID">
+      <input type="text" id="unique" placeholder="Enter Unique ID" />
       <button id="show" onclick="showimage()">
-        Download <img id="downimg" src="download.gif" alt="downloading..." />
+        <span>Download</span>
+        <img id="downimg" src="download.gif" alt="Downloading..." />
       </button>
     </div>
-  </div>
-
-  <div class="Drop-here">
-    <h1 class="Drop-text">Drop Here</h1>
   </div>
 
   <p id="note">(Note: Upload limit is 100MB)</p>
   <p id="footer">Made By Rishab and Ruchita</p>
 
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
