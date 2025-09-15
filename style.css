@@ -1,72 +1,83 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body with dark striped background */
+/* Layout: sticky footer with flex */
+html, body {
+  height: 100%;
+}
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* enables footer at bottom */
   font-family: "Poppins", sans-serif;
-  background: repeating-linear-gradient(
-    -45deg,
-    #0f1020,
-    #0f1020 20px,
-    #1a1b2e 20px,
-    #1a1b2e 40px
-  );
   color: #fff;
+
+  /* Fine, subtle diagonal pinstripes */
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #0f1124 0px,
+      #0f1124 8px,
+      #151735 8px,
+      #151735 16px
+    );
+} /* fine pattern via repeating-linear-gradient */ /* refs */ 
+/* The card area grows, pushing footer down */
+.page {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  flex: 1;
+  padding: 32px;
 }
 
-/* Card (Glassmorphism style) */
+/* Card (glassmorphism) */
 .card {
-  background: rgba(40, 42, 65, 0.8);
+  background: rgba(40, 42, 65, 0.78);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 35px 25px;
-  max-width: 400px;
+  max-width: 420px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Title */
+/* Titles */
 .card h1 {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 20px;
-  color: #ffcc66; /* golden */
+  margin-bottom: 18px;
+  color: #ffcc66;
 }
-
-/* Section headers */
 .card h2 {
-  font-size: 1.3rem;
-  margin: 20px 0 10px;
-  color: #00d4c6; /* cyan accent */
+  font-size: 1.1rem;
+  margin: 18px 0 8px;
+  color: #00d4c6;
 }
 
-/* Input Fields */
+/* Inputs */
 input[type="file"],
 input[type="text"] {
   width: 100%;
   padding: 10px 12px;
   margin: 10px 0;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 14px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
 }
-
-input::placeholder {
-  color: #aaa;
-}
-
+input::placeholder { color: #aeb3c2; }
 input:focus {
   outline: 2px solid #00d4c6;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* Buttons */
@@ -74,55 +85,51 @@ button {
   background: #00a8e8;
   color: #fff;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 700;
   padding: 10px;
   margin-top: 12px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s;
-  width: 50%;
+  transition: background 0.25s ease, transform 0.06s ease;
+  width: 55%;
 }
-
-button:hover {
-  background: #008bbd;
-}
+button:hover { background: #008bbd; }
+button:active { transform: translateY(1px); }
 
 /* Unique ID box */
 #showunique {
   width: 100%;
   margin-top: 12px;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   text-align: center;
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 16px;
 }
 
-/* Drop Here Box */
-.Drop-here {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
+/* Remove the old drag/drop overlay entirely */
+.Drop-here,
 .Drop-text {
-  font-size: 2rem;
-  color: #00d4c6;
+  display: none !important;
 }
 
-/* Footer */
+/* Footer at bottom */
 #footer {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #ccc;
   text-align: center;
+  font-size: 14px;
+  color: #cfcfd7;
+  padding: 14px 10px;
+  background: rgba(0, 0, 0, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: auto; /* keeps it at bottom in flex layout */
+}
+
+/* Small screens */
+@media (max-width: 420px) {
+  .card { padding: 28px 18px; }
+  button { width: 100%; }
 }
