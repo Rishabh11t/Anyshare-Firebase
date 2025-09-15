@@ -1,168 +1,109 @@
-/* Reset some basic styles */
+
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* Body with smooth background and font */
+/* Body */
 body {
-  background-color: #f6f9fc;
-  font-family: "Open Sans", sans-serif;
-  color: #212529;
-  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 30px;
 }
 
 /* Header */
 h1 {
-  font-size: 3rem;
-  color: #1a1a1a;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2c3e50;
   text-align: center;
-  margin-bottom: 30px;
 }
 
-/* Card */
+/* Card Container */
 .card {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 30px 25px;
+  background: #fff;
+  max-width: 420px;
+  width: 100%;
+  padding: 25px;
+  margin: 15px auto;
   border-radius: 16px;
-  background-color: #ffffff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   text-align: center;
-  z-index: 1;
+  transition: transform 0.2s ease;
 }
 
-/* Responsive */
-@media only screen and (max-width: 600px) {
-  .card {
-    width: 95%;
-  }
+.card:hover {
+  transform: translateY(-5px);
 }
 
-/* Input Styling */
-input[type="text"],
-input[type="file"] {
-  width: 90%;
-  padding: 12px 16px;
+/* Input */
+input[type="file"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
   margin: 10px 0;
-  border: 1.5px solid #ced4da;
-  border-radius: 8px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
   transition: border-color 0.3s, box-shadow 0.3s;
-  font-size: 16px;
 }
 
-input[type="text"]:focus,
-input[type="file"]:focus {
-  border-color: #4dabf7;
-  box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.2);
+input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
   outline: none;
-  background-color: #f1f9ff;
 }
 
 /* Buttons */
 button {
-  padding: 14px 24px;
-  background-color: #212529;
-  color: #fff;
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
   border: none;
+  border-radius: 10px;
+  background: #6c63ff;
+  color: #fff;
   font-size: 16px;
-  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  transition: background-color 0.3s;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background-color: #343a40;
+  background: #574bd6;
 }
 
-/* Icons inside buttons */
-#downimg, #uping {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #fff;
-  transition: transform 0.3s ease;
-}
-
-#downimg:hover, #uping:hover {
-  transform: scale(1.1);
-}
-
-/* Section Headers */
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #343a40;
-}
-
-/* Paragraphs */
-p {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #495057;
-  margin-bottom: 10px;
-}
-
-/* Unique ID Display */
+/* Unique ID display */
 #showunique {
-  font-size: 2rem;
-  padding: 10px 20px;
-  background-color: #e9f5db;
-  border: 2px solid #ced4da;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 18px;
   border-radius: 10px;
-  margin: 10px auto;
+  background: #f4f9ff;
+  border: 2px solid #6c63ff;
+  color: #6c63ff;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 #showunique:hover {
-  background-color: #212529;
-  color: #e9f5db;
+  background: #6c63ff;
+  color: #fff;
 }
 
 /* Footer */
-#footer, #note {
+#footer {
+  margin-top: 30px;
   font-size: 14px;
+  color: #888;
   text-align: center;
-  margin-top: 20px;
-  color: #6c757d;
-}
-
-/* Drag and Drop Area */
-.Drop-here {
-  width: 70%;
-  height: 80vh;
-  border: 2px dashed #adb5bd;
-  border-radius: 12px;
-  background-color: #ffffff;
-  color: #495057;
-  font-size: 1.25rem;
-  text-align: center;
-  padding: 20px;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: none;
-  opacity: 0.95;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s;
-}
-
-/* Flicker Animation (if you want to re-enable) */
-@keyframes flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    text-shadow: 0 0 4px #000, 0 0 11px #fff, 0 0 19px #fff,
-                 0 0 40px #0fa, 0 0 80px #0fa, 0 0 100px #0fa;
-  }
-  20%, 24%, 55% {
-    text-shadow: none;
-  }
 }
