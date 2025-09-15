@@ -10,7 +10,7 @@ body {
   font-family: "Poppins", sans-serif;
   color: #fff;
 
-  /* Fine, subtle diagonal stripes */
+  /* Fine, subtle diagonal stripes background */
   background:
     repeating-linear-gradient(
       135deg,
@@ -45,8 +45,17 @@ body {
 }
 
 /* Headings */
-.card h1 { font-size: 2rem; font-weight: 700; margin-bottom: 18px; color: #ffcc66; }
-.card h2 { font-size: 1.1rem; margin: 18px 0 8px; color: #00d4c6; }
+.card h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #ffcc66;
+}
+.card h2 {
+  font-size: 1.1rem;
+  margin: 16px 0 10px;
+  color: #00d4c6;
+}
 
 /* Inputs */
 input[type="file"], input[type="text"] {
@@ -60,7 +69,11 @@ input[type="file"], input[type="text"] {
   color: #fff;
 }
 input::placeholder { color: #aeb3c2; }
-input:focus { outline: 2px solid #00d4c6; background: rgba(255,255,255,0.12); }
+input:focus {
+  outline: none;
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 6px #00d4c6;
+}
 
 /* Buttons */
 button {
@@ -75,9 +88,20 @@ button {
   cursor: pointer;
   transition: background .25s ease, transform .06s ease;
   width: 55%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* space between text and icon */
 }
 button:hover { background: #008bbd; }
 button:active { transform: translateY(1px); }
+
+button img {
+  width: 18px;
+  height: 18px;
+  display: none; /* only shown when loading */
+}
 
 /* Unique ID display */
 #showunique {
@@ -91,6 +115,14 @@ button:active { transform: translateY(1px); }
   color: #fff;
   font-weight: 700;
   font-size: 16px;
+}
+
+/* Note styling */
+#note {
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 12px;
 }
 
 /* Remove the old drag-drop overlay entirely */
@@ -112,3 +144,4 @@ button:active { transform: translateY(1px); }
   .card { padding: 28px 18px; }
   button { width: 100%; }
 }
+
