@@ -1,4 +1,3 @@
-// Firebase config (unchanged)
 const firebaseConfig = {
   apiKey: "AIzaSyBPlnG8AQWAQS5O0TFFnIHyw2DfiNqAHfM",
   authDomain: "image-share-4446c.firebaseapp.com",
@@ -8,128 +7,143 @@ const firebaseConfig = {
   appId: "1:424462799129:web:33b634c2a607aa72cb3588",
   measurementId: "G-31PPT6CB61",
 };
+
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.database();
-const messagesRef = db.ref("image");
-const storage = firebase.storage();
+// Reference messages collection
+var messagesRef = firebase.database().ref("image");
 
-// Upload with progress updates
+// Listen for form submit
+
 function uploadImage() {
-  const input = document.getElementById("file");
-  if (!input.value) {
-    const old = document.getElementById("upload").innerHTML;
+  if (document.getElementById("file").value != "") {
+    var uploadtext = document.getElementById("upload").innerHTML;
+    document.getElementById("upload").innerHTML = "Uploading...";
+    var file = document.getElementById("file").files[0];
+    var storageRef = firebase.storage().ref("images/" + file.name);
+    var uploadTask = storageRef.put(file);
+    uploadTask.on(
+      "state_changed",
+      function (snapshot) {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes * 100).toFixed(2);
+        console.log("Upload is " + progress + "% done");
+        document.getElementById("upload").innerHTML = "Uploading"+" "+progress+"%...";
+      },
+      function (error) {
+        console.log(error.message);
+        document.getElementById("upload").innerHTML = "Upload Failed";
+      },
+      function () {
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          console.log("File available at", downloadURL);
+          saveMessage(downloadURL);
+        });
+      }
+    );
+  } else {
+    var uploadtext = document.getElementById("upload").innerHTML;
     document.getElementById("upload").innerHTML = "Please select a file";
-    setTimeout(() => (document.getElementById("upload").innerHTML = old), 2000);
-    return;
+    // After 2 sec make it empty
+    setTimeout(function () {
+      document.getElementById("upload").innerHTML = uploadtext;
+    }, 2000);
   }
-
-  const btn = document.getElementById("upload");
-  btn.innerHTML = "Uploading...";
-
-  const file = input.files;
-  const storageRef = storage.ref("images/" + file.name);
-  const uploadTask = storageRef.put(file);
-
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(2);
-      btn.innerHTML = `Uploading ${progress}%...`;
-    },
-    (error) => {
-      console.log(error.message);
-      btn.innerHTML = "Upload Failed";
-    },
-    () => {
-      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-        saveMessage(downloadURL);
-      });
-    }
-  );
 }
 
-// Create a unique 5‑digit number by querying once
-function generateUniqueNumber() {
-  return new Promise((resolve, reject) => {
-    const tryOnce = () => {
-      const number = Math.floor(10000 + Math.random() * 90000);
-      messagesRef.orderByChild("number").equalTo(number).once(
-        "value",
-        (snap) => {
-          if (snap.exists()) tryOnce();
-          else resolve(number);
-        },
-        reject
-      );
-    };
-    tryOnce();
+
+
+// Save message to firebase
+function saveMessage(downloadURL) {
+  var newMessageRef = messagesRef.push();
+  var unique = createUniquenumber();
+  // Hidding recive file div
+  var x = document.getElementById("downloadiv");
+  x.style.display = "none";
+  var showUnique = document.getElementById("ShowUniqueID");
+  var shU = document.getElementById("showunique");
+  shU.value = unique;
+  showUnique.style.display = "block";
+  // showUnique.value = unique;
+  newMessageRef.set({
+    url: downloadURL,
+    number: unique,
   });
+  document.getElementById("upload").innerHTML = "Upload Successful";
+  //Make file input empty
+  document.getElementById("file").value = "";
 }
 
-async function saveMessage(downloadURL) {
-  const downloadDiv = document.getElementById("downloadiv");
-  if (downloadDiv) downloadDiv.style.display = "none";
-
-  try {
-    const unique = await generateUniqueNumber();
-    const newRef = messagesRef.push();
-    await newRef.set({ url: downloadURL, number: unique });
-
-    const showUnique = document.getElementById("ShowUniqueID");
-    const shU = document.getElementById("showunique");
-    if (shU) shU.value = unique;
-    if (showUnique) showUnique.style.display = "block";
-
-    document.getElementById("upload").innerHTML = "Upload Successful";
-    document.getElementById("file").value = "";
-  } catch (e) {
-    console.log(e);
-    document.getElementById("upload").innerHTML = "Upload Failed";
-  }
+function createUniquenumber() {
+  // Create a unique 5 digit number for each image which is not in the database field number yet
+  var number = Math.floor(10000 + Math.random() * 90000);
+  var ref = firebase.database().ref("image");
+  ref.on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      var childData = childSnapshot.val();
+      if (childData.number == number) {
+        createUniquenumber();
+      }
+    });
+  });
+  return number;
 }
 
 function showimage() {
-  const uniqueId = document.getElementById("unique").value.trim();
-  if (!uniqueId) {
+  var uniqueId = document.getElementById("unique").value;
+  if (uniqueId == "") {
     alert("Unique Id is empty\n Please enter a Unique Id");
     return;
   }
-
-  messagesRef
-    .orderByChild("number")
-    .equalTo(Number(uniqueId))
-    .once("value")
-    .then((snapshot) => {
-      if (!snapshot.exists()) {
-        alert("File not found. Check the Unique ID");
-        return;
-      }
-      snapshot.forEach((child) => {
-        const data = child.val();
-        window.open(data.url, "_blank");
-
-        // Remove DB record immediately
-        messagesRef.child(child.key).remove();
-
-        // Remove from storage after 15s
-        setTimeout(() => {
-          const sref = storage.refFromURL(data.url);
-          sref.delete().catch(() => {});
+  var ref = firebase.database().ref("image");
+  var flag = 0;
+  ref.on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      var childData = childSnapshot.val();
+      if (childData.number == uniqueId) {
+        flag = 1;
+        window.open(childData.url, "_blank");
+        // AFter this delete the image from the database
+        ref.child(childSnapshot.key).remove();
+        // Remove file from storage
+        //Run this with 5sec delay
+        setTimeout(function () {
+          var storageRef = firebase.storage().refFromURL(childData.url);
+          storageRef
+            .delete()
+            .then(function () {
+              ref.child(childSnapshot.key).remove();
+              // File deleted successfully
+            })
+            .catch(function (error) {});
         }, 15000);
-      });
+      }
     });
+  });
+  // After some time if flag is still 0 then show alert
+  // setTimeout(function(){
+
+  // if(flag == 0){
+  //     alert("File not found Check the Unique ID");
+  // }
+  // }, 5000);
 }
 
 function flesize() {
-  const f = document.getElementById("file").files;
-  if (f && f.size > 100000000) {
-    alert("File size is greater than 100MB\n Please select a file less than 100MB");
+  var file = document.getElementById("file").files[0];
+  // Dont allow file size greater than 100MB
+  if (file.size > 100000000) {
+    alert(
+      "File size is greater than 100MB\n Please select a file less than 100MB"
+    );
     document.getElementById("file").value = "";
   }
 }
 
-// Press Enter to trigger download
+// Click on download button when enter is pressed
 document.getElementById("unique").addEventListener("keyup", function (event) {
-  if (event.key === "Enter") document.getElementById("show").click();
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("show").click();
+  }
 });
