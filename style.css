@@ -97,10 +97,13 @@ button {
 button:hover { background: #008bbd; }
 button:active { transform: translateY(1px); }
 
+/* Button icons (GIF loaders) */
 button img {
   width: 18px;
   height: 18px;
-  display: none; /* only shown when loading */
+  object-fit: contain;
+  flex-shrink: 0;    /* prevent stretching */
+  display: none;     /* default hidden until JS shows it */
 }
 
 /* Unique ID display */
